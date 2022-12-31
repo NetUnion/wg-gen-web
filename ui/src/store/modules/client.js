@@ -1,5 +1,7 @@
 import ApiService from "../../services/api.service";
 
+import { Buffer } from 'buffer';
+
 const state = {
   error: null,
   clients: [],
