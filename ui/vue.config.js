@@ -1,7 +1,7 @@
 module.exports = {
   devServer: {
     port: 8081,
-    disableHostCheck: true,
+    allowedHosts: 'all',
   },
   transpileDependencies: [
     "vuetify"
