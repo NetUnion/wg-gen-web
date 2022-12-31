@@ -10,6 +10,14 @@ if (process.env.NODE_ENV === "development"){
   baseUrl = process.env.VUE_APP_API_BASE_URL;
 }
 
+if (process.env.VUE_APP_API_MAP) {
+  const apiMaps = JSON.parse(process.env.VUE_APP_API_MAP);
+  if (window.location.hostname in apiMaps)
+    baseUrl = apiMaps[window.location.hostname] + "/api/v1.0";
+  else if ("default" in apiMaps) 
+    baseUrl = apiMaps["default"] + "/api/v1.0";
+}
+
 Vue.axios.defaults.baseURL = baseUrl;
 
 Vue.axios.interceptors.response.use(function (response) {
