@@ -1,29 +1,40 @@
 <template>
     <v-container>
-        <v-app-bar app>
-            <img class="mr-3" :src="require('../assets/logo.png')" height="50" alt="Wg Gen Web"/>
-            <v-toolbar-title to="/">Wg Gen Web</v-toolbar-title>
+        <v-app-bar app class="overflow-x-auto">
+            <img v-if="!siteicon" :src="require('../assets/logo.png')" height="50" alt="Wg Gen Web"/>
+            <v-toolbar-title to="/" @click="$router.push('/')">
+                <v-icon large v-if="siteicon" left>{{ siteicon }}</v-icon>
+                {{ sitename }}
+            </v-toolbar-title>
 
             <v-spacer />
 
             <v-toolbar-items>
-                <v-btn to="/clients">
+                <v-btn icon @click="$vuetify.theme.dark = !$vuetify.theme.dark">
+                    <v-icon dark>mdi-theme-light-dark</v-icon>
+                </v-btn>
+                <v-btn to="/clients" v-if="isAuthenticated">
                     Clients
                     <v-icon right dark>mdi-account-network-outline</v-icon>
                 </v-btn>
-                <v-btn to="/server">
+                <v-btn to="/server" v-if="isAuthenticated">
                     Server
                     <v-icon right dark>mdi-vpn</v-icon>
                 </v-btn>
-                <v-btn to="/status">
+                <v-btn to="/status" v-if="isAuthenticated">
                     Status
                     <v-icon right dark>mdi-chart-bar</v-icon>
+                </v-btn>
+                <v-btn color="primary" @click="oauth2_url" v-if="!isAuthenticated">
+                    Login
+                    <v-icon right dark>mdi-login</v-icon>
                 </v-btn>
             </v-toolbar-items>
 
             <v-menu
                     left
                     bottom
+                    v-if="isAuthenticated"
             >
                 <template v-slot:activator="{ on }">
                     <v-btn icon v-on="on">
@@ -69,12 +80,16 @@
     computed:{
       ...mapGetters({
         user: 'auth/user',
+        isAuthenticated: 'auth/isAuthenticated',
       }),
+      sitename: () => process.env.VUE_APP_SITENAME || 'Wg Gen Web',
+      siteicon: () => process.env.VUE_APP_SITEICON
     },
 
     methods: {
       ...mapActions('auth', {
         logout: 'logout',
+        oauth2_url: 'oauth2_url',
       }),
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
     <Notification v-bind:notification="notification"/>
-    <div v-if="this.isAuthenticated">
+    <div>
       <Header/>
 
       <v-main>
@@ -19,7 +19,8 @@
   import Notification from './components/Notification'
   import Header from "./components/Header";
   import Footer from "./components/Footer";
-  import {mapActions, mapGetters} from "vuex";
+//  import {mapActions, mapGetters} from "vuex";
+  import {mapGetters} from "vuex";
 
   export default {
     name: 'App',
@@ -53,16 +54,17 @@
       this.$vuetify.theme.dark = true
     },
 
-    mounted() {
-      if (this.$route.query.code && this.$route.query.state) {
-        this.oauth2_exchange({
-          code: this.$route.query.code,
-          state: this.$route.query.state
-        })
-      } else {
-        this.oauth2_url()
-      }
-    },
+    // mounted() {
+      // if (this.$route.query.code && this.$route.query.state) {
+      //   this.oauth2_exchange({
+      //     code: this.$route.query.code,
+      //     state: this.$route.query.state
+      //   })
+      // }
+      // } else {
+      //   this.oauth2_url()
+      // }
+    // },
 
     watch: {
       authError(newValue, oldValue) {
@@ -85,6 +87,9 @@
         if (newValue === true) {
           this.$router.push('/clients')
         }
+        else{
+          this.$router.push('/')
+        }
       },
 
       authStatus(newValue, oldValue) {
@@ -96,10 +101,10 @@
     },
 
     methods: {
-      ...mapActions('auth', {
-        oauth2_exchange: 'oauth2_exchange',
-        oauth2_url: 'oauth2_url',
-      }),
+      // ...mapActions('auth', {
+      //   oauth2_exchange: 'oauth2_exchange',
+      //   oauth2_url: 'oauth2_url',
+      // }),
 
       notify(color, msg) {
         this.notification.show = true;

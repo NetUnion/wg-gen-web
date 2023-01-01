@@ -7,7 +7,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/clients',
-    name: 'clients',
+    name: 'Clients',
     component: function () {
       return import(/* webpackChunkName: "Clients" */ '../views/Clients.vue')
     },
@@ -17,7 +17,7 @@ const routes = [
   },
   {
     path: '/server',
-    name: 'server',
+    name: 'Server',
     component: function () {
       return import(/* webpackChunkName: "Server" */ '../views/Server.vue')
     },
@@ -27,12 +27,19 @@ const routes = [
   },
   {
     path: '/status',
-    name: 'status',
+    name: 'Status',
     component: function () {
       return import(/* webpackChunkName: "Status" */ '../views/Status.vue')
     },
     meta: {
       requiresAuth: true
+    }
+  },
+  {
+    path: '/',
+    name: 'Home',
+    component: function () {
+      return import(/* webpackChunkName: "Home" */ '../views/Home.vue')
     }
   },
 ];
@@ -49,7 +56,8 @@ router.beforeEach((to, from, next) => {
       next()
       return
     }
-    next('/')
+    //next('/')
+    store.dispatch("auth/oauth2_url")
   } else {
     next()
   }

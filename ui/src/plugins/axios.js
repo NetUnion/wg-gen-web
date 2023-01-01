@@ -23,12 +23,12 @@ Vue.axios.defaults.baseURL = baseUrl;
 Vue.axios.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
-  if (401 === error.response.status) {
-    TokenService.destroyToken();
-    TokenService.destroyClientId();
-    window.location = '/';
-  } else {
-    return Promise.reject(error);
-  }
+  // if (401 === error.response.status) {
+  //   TokenService.destroyToken();
+  //   TokenService.destroyClientId();
+  //   window.location = '/';
+  // } else {
+  //   return Promise.reject(error);
+  // }
 });
 
