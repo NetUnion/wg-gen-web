@@ -2,7 +2,8 @@
   <v-main>
     <v-container>
       <h1 class="text-center text-h1">
-        <v-icon color="grey" size="128">mdi-vpn</v-icon>
+        <img :style="$vuetify.theme.dark?'':'filter: invert(100%);'" v-if="!siteicon" :src="require('../assets/logo.png')" height="256" alt="Wg Gen Web"/>
+        <v-icon color="grey" size="256" v-else>{{ siteicon }}</v-icon>
       </h1>
       <div class="mt-3 mb-6">
         <template v-if="isAuthenticated">
@@ -56,9 +57,18 @@
     computed: {
       ...mapGetters({
         user: 'auth/user',
+        authStatus: 'auth/authStatus',
         isAuthenticated: 'auth/isAuthenticated',
       }),
       sitename: () => process.env.VUE_APP_SITENAME || 'Wg Gen Web',
+      siteicon: () => process.env.VUE_APP_SITEICON
+    },
+
+    watch: {
+      authStatus(val) {
+        if(val !== 'success')
+          this.redirecting = false
+      }
     },
 
     mounted() {

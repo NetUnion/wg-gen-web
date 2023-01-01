@@ -2,7 +2,7 @@
     <v-container>
         <v-app-bar app class="overflow-x-auto">
             <img v-if="!siteicon" :src="require('../assets/logo.png')" height="50" alt="Wg Gen Web"/>
-            <v-toolbar-title to="/" @click="$router.push('/')">
+            <v-toolbar-title to="/" @click="$router.push('/').catch(()=>{})">
                 <v-icon large v-if="siteicon" left>{{ siteicon }}</v-icon>
                 {{ sitename }}
             </v-toolbar-title>
@@ -57,7 +57,7 @@
                         </v-list-item-content>
                     </v-list-item>
                     <v-card-actions>
-                        <v-btn small
+                        <v-btn small outlined
                                 v-on:click="logout()"
                         >
                             logout

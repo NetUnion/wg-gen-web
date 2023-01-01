@@ -5,7 +5,6 @@
                 Clients
                 <v-switch
                         class="ml-3"
-                        dark
                         :label="listView ? 'Switch to card view' : 'Switch to list view'"
                         v-model="listView"
                 />
@@ -39,6 +38,7 @@
                             :key="i"
                             color="indigo"
                             text-color="white"
+                            class="mr-2"
                     >
                         <v-icon left>mdi-ip-network</v-icon>
                         {{ ip }}
@@ -57,12 +57,12 @@
                 </template>
                 <template v-slot:item.created="{ item }">
                     <v-row>
-                        <p>At {{ item.created | formatDate }} by {{ item.createdBy }}</p>
+                        <p class="mb-0">At {{ item.created | formatDate }} by {{ item.createdBy }}</p>
                     </v-row>
                 </template>
                 <template v-slot:item.updated="{ item }">
                     <v-row>
-                        <p>At {{ item.updated | formatDate }} by {{ item.updatedBy }}</p>
+                        <p class="mb-0">At {{ item.updated | formatDate }} by {{ item.updatedBy }}</p>
                     </v-row>
                 </template>
                 <template v-slot:item.action="{ item }">
@@ -83,7 +83,7 @@
                                 class="pr-1 pl-1"
                                 @click.stop="email(item)"
                         >
-                            mdi-email-send-outline
+                            mdi-email-fast-outline
                         </v-icon>
                         <v-icon
                                 class="pr-1 pl-1"
@@ -91,14 +91,15 @@
                         >
                             mdi-trash-can-outline
                         </v-icon>
-                        <v-switch
-                                dark
-                                class="pr-1 pl-1"
-                                color="success"
-                                v-model="item.enable"
-                                v-on:change="update(item)"
-                        />
                     </v-row>
+                </template>
+                <template v-slot:item.enable="{ item }">
+                    <v-switch
+                            class="pr-1 pl-1"
+                            color="success"
+                            v-model="item.enable"
+                            v-on:change="update(item)"
+                    />
                 </template>
 
             </v-data-table>
@@ -110,10 +111,10 @@
                             sm12 lg6
                     >
                         <v-card
-                                :color="client.enable ? '#1F7087' : 'warning'"
+                                :color="client.enable ? 'teal' : 'warning'"
                                 class="mx-auto"
                                 raised
-                                shaped
+                                dark
                         >
                             <v-list-item>
                                 <v-list-item-content>
@@ -135,6 +136,7 @@
                                 <v-chip
                                         v-for="(ip, i) in client.address"
                                         :key="i"
+                                        class="mr-2"
                                         color="indigo"
                                         text-color="white"
                                 >
@@ -204,7 +206,7 @@
                                                 v-on="on"
                                         >
                                             <span class="d-none d-lg-flex">Send Email</span>
-                                            <v-icon right dark>mdi-email-send-outline</v-icon>
+                                            <v-icon right dark>mdi-email-fast-outline</v-icon>
                                         </v-btn>
                                     </template>
                                     <span>Send Email</span>
@@ -213,7 +215,6 @@
                                 <v-tooltip right>
                                     <template v-slot:activator="{ on }">
                                         <v-switch
-                                                dark
                                                 v-on="on"
                                                 color="success"
                                                 v-model="client.enable"
@@ -272,7 +273,6 @@
                                         hint="Write IPv4 or IPv6 CIDR and hit enter"
                                         label="Allowed IPs"
                                         multiple
-                                        dark
                                 >
                                     <template v-slot:selection="{ attrs, item, select, selected }">
                                         <v-chip
@@ -292,7 +292,6 @@
                                         hint="Write tag name and hit enter"
                                         label="Tags"
                                         multiple
-                                        dark
                                 >
                                     <template v-slot:selection="{ attrs, item, select, selected }">
                                         <v-chip
@@ -376,7 +375,6 @@
                                         hint="Write IPv4 or IPv6 CIDR and hit enter"
                                         label="Addresses"
                                         multiple
-                                        dark
                                 >
                                     <template v-slot:selection="{ attrs, item, select, selected }">
                                         <v-chip
@@ -396,7 +394,6 @@
                                         hint="Write IPv4 or IPv6 CIDR and hit enter"
                                         label="Allowed IPs"
                                         multiple
-                                        dark
                                 >
                                     <template v-slot:selection="{ attrs, item, select, selected }">
                                         <v-chip
@@ -416,7 +413,6 @@
                                         hint="Write tag name and hit enter"
                                         label="Tags"
                                         multiple
-                                        dark
                                 >
                                     <template v-slot:selection="{ attrs, item, select, selected }">
                                         <v-chip
@@ -483,7 +479,7 @@
         { text: 'Created', value: 'created', sortable: false, },
         { text: 'Updated', value: 'updated', sortable: false, },
         { text: 'Actions', value: 'action', sortable: false, },
-
+        { text: 'Enabled', value: 'enable', sortable: false, },
       ],
     }),
 

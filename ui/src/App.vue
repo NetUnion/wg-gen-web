@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <Notification v-bind:notification="notification"/>
+    <Notification/>
     <div>
       <Header/>
 
@@ -19,7 +19,6 @@
   import Notification from './components/Notification'
   import Header from "./components/Header";
   import Footer from "./components/Footer";
-//  import {mapActions, mapGetters} from "vuex";
   import {mapGetters} from "vuex";
 
   export default {
@@ -31,22 +30,11 @@
       Notification
     },
 
-    data: () => ({
-      notification: {
-        show: false,
-        color: '',
-        text: '',
-      },
-    }),
-
     computed:{
       ...mapGetters({
         isAuthenticated: 'auth/isAuthenticated',
         authStatus: 'auth/authStatus',
         authRedirectUrl: 'auth/authRedirectUrl',
-        authError: 'auth/error',
-        clientError: 'client/error',
-        serverError: 'server/error',
       })
     },
 
@@ -54,34 +42,7 @@
       this.$vuetify.theme.dark = true
     },
 
-    // mounted() {
-      // if (this.$route.query.code && this.$route.query.state) {
-      //   this.oauth2_exchange({
-      //     code: this.$route.query.code,
-      //     state: this.$route.query.state
-      //   })
-      // }
-      // } else {
-      //   this.oauth2_url()
-      // }
-    // },
-
     watch: {
-      authError(newValue, oldValue) {
-        console.log(newValue)
-        this.notify('error', newValue);
-      },
-
-      clientError(newValue, oldValue) {
-        console.log(newValue)
-        this.notify('error', newValue);
-      },
-
-      serverError(newValue, oldValue) {
-        console.log(newValue)
-        this.notify('error', newValue);
-      },
-
       isAuthenticated(newValue, oldValue) {
         console.log(`Updating isAuthenticated from ${oldValue} to ${newValue}`);
         if (newValue === true) {
@@ -99,18 +60,5 @@
         }
       },
     },
-
-    methods: {
-      // ...mapActions('auth', {
-      //   oauth2_exchange: 'oauth2_exchange',
-      //   oauth2_url: 'oauth2_url',
-      // }),
-
-      notify(color, msg) {
-        this.notification.show = true;
-        this.notification.color = color;
-        this.notification.text = msg;
-      }
-    }
   };
 </script>

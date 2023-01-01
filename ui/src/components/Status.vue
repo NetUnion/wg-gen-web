@@ -60,6 +60,7 @@
                   :key="i"
                   color="indigo"
                   text-color="white"
+                  class="mr-2"
               >
                 <v-icon left>mdi-ip-network</v-icon>
                 {{ ip }}

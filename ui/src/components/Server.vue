@@ -2,7 +2,7 @@
     <v-container v-if="server">
         <v-row>
             <v-col cols="12">
-                <v-card dark>
+                <v-card>
                     <v-card-title>
                         Server's interface configuration
                     </v-card-title>
@@ -28,7 +28,6 @@
                                     hint="Write IPv4 or IPv6 CIDR and hit enter"
                                     label="Server interface addresses"
                                     multiple
-                                    dark
                             >
                                 <template v-slot:selection="{ attrs, item, select, selected }">
                                     <v-chip
@@ -47,7 +46,7 @@
                 </v-card>
             </v-col>
             <v-col cols="12">
-                <v-card dark>
+                <v-card>
                     <v-card-title>
                         Client's global configuration
                         <v-spacer></v-spacer>
@@ -75,7 +74,6 @@
                                     hint="Write IPv4 or IPv6 address and hit enter"
                                     label="DNS servers for clients"
                                     multiple
-                                    dark
                             >
                                 <template v-slot:selection="{ attrs, item, select, selected }">
                                     <v-chip
@@ -95,7 +93,6 @@
                                     hint="Write IPv4 or IPv6 address and hit enter"
                                     label="Default Allowed IPs for clients"
                                     multiple
-                                    dark
                             >
                                 <template v-slot:selection="{ attrs, item, select, selected }">
                                     <v-chip
@@ -128,7 +125,7 @@
         </v-row>
         <v-row>
             <v-col cols="12">
-                <v-card dark>
+                <v-card>
                     <v-card-title>
                         Interface configuration hooks
                     </v-card-title>
@@ -156,7 +153,7 @@
             </v-col>
         </v-row>
         <v-row>
-            <v-divider dark/>
+            <v-spacer/>
             <v-btn
                     class="ma-2"
                     color="success"
@@ -174,7 +171,7 @@
                 Update server configuration
                 <v-icon right dark>mdi-update</v-icon>
             </v-btn>
-            <v-divider dark/>
+            <v-spacer/>
         </v-row>
     </v-container>
 </template>

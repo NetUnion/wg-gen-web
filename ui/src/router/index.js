@@ -56,8 +56,8 @@ router.beforeEach((to, from, next) => {
       next()
       return
     }
-    //next('/')
-    store.dispatch("auth/oauth2_url")
+    next('/')
+    //store.dispatch("auth/oauth2_url")
   } else {
     next()
   }

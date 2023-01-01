@@ -2,6 +2,7 @@ import Vue from 'vue'
 import axios from "axios";
 import VueAxios from "vue-axios";
 import TokenService from "../services/token.service";
+import store from "../store";
 
 Vue.use(VueAxios, axios);
 
@@ -23,12 +24,12 @@ Vue.axios.defaults.baseURL = baseUrl;
 Vue.axios.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
-  // if (401 === error.response.status) {
-  //   TokenService.destroyToken();
-  //   TokenService.destroyClientId();
-  //   window.location = '/';
-  // } else {
-  //   return Promise.reject(error);
-  // }
+  if (401 === error.response.status) {
+    TokenService.destroyToken();
+    TokenService.destroyClientId();
+    store.dispatch("auth/logout")
+  } else {
+    return Promise.reject(error);
+  }
 });
 
