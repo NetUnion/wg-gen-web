@@ -7,6 +7,6 @@ module.exports = {
     "vuetify"
   ],
   pwa: {
-    name: 'Wg Gen Web',
+    name: 'NUVPN Dashboard',
   }
 };

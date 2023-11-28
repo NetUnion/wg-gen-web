@@ -60,7 +60,7 @@
         authStatus: 'auth/authStatus',
         isAuthenticated: 'auth/isAuthenticated',
       }),
-      sitename: () => process.env.VUE_APP_SITENAME || 'Wg Gen Web',
+      sitename: () => process.env.VUE_APP_SITENAME || 'NUVPN Dashboard',
       siteicon: () => process.env.VUE_APP_SITEICON
     },
 
